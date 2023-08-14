@@ -1,11 +1,15 @@
-from google.colab import auth
-from google.auth import default
+import subprocess
 
-import gspread
+def is_package_installed(package_name):
+    try:
+        subprocess.run(["pip", "show", package_name], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return True
+    except subprocess.CalledProcessError:
+        return False
 
-pip install gspread_formatting
-from gspread_formatting import *
-
-def authorize_in_google_services():
-  auth.authenticate_user()
-  creds, _ = default()
+def install_package(package_name):      
+    if not is_package_installed(package_name):
+        print(f"Устанавливаю пакет {package_name}...")
+        subprocess.check_call(["pip", "install", package_name])
+    else:
+        print(f"Пакет {package_name} уже установлен.")
