@@ -3,7 +3,7 @@ from google.auth import default
 
 import gspread
 
-!pip install gspread_formatting
+pip install gspread_formatting
 from gspread_formatting import *
 
 def authorize_in_google_services():
